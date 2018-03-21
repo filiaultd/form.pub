@@ -1,3 +1,4 @@
 # form.pub
-scripts and small data sets for the A. formosa/pubescens project
-please keep me nice and tidy!
+Scripts and small data sets for the A. formosa/pubescens project.
+
+Please keep me nice and tidy!
