@@ -1,0 +1,10 @@
+pool2.bam.no.dups	49	12
+pool3.bam.no.dups	24	9
+pool4.bam.no.dups	68	8
+pool5.bam.no.dups	37	9
+pool7.bam.no.dups	35	14
+pool10.bam.no.dups	40	10
+pool11.bam.no.dups	47	9
+pool12.bam.no.dups	22	15
+pool13.bam.no.dups	26	17
+pool14.bam.no.dups	48	20
