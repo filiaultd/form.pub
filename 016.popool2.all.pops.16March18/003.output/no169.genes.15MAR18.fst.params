@@ -1,0 +1,13 @@
+Using input	no169.genes.15MAR18.sync
+Using output	/lustre/scratch/projects/aquilegia/016.popool2.all.pops.16March18/003.output/no169.genes.15MAR18.fst
+Using min-count	4
+Using min-coverage	4
+Using max-coverage	200
+Using min-covered-fraction	0.0
+Using pool-size	40:47:22:26:48:49:24:68:37:35
+Using window-size	100000
+Using step-size	100000
+Using asympt-unbiased	0
+Using suppress na	0
+Using test	0
+Using help	0
