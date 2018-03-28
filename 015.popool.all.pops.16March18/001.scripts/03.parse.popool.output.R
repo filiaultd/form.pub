@@ -15,6 +15,10 @@ pool.index$pool.name <- gsub("\\?","", pool.index$pool.name)
 pool.index <- unique(pool.index)
 pool.index$pool.number <- paste("pool",pool.index$pool.number, sep="")
 pool.index <- pool.index[pool.index$pool.number%in%c("pool1", "pool6","pool9")==FALSE,]
+### Output pool.index for anji
+write.csv(pool.index, "../002.input/pool.index.csv",quote=FALSE,row.names=FALSE)
+
+
 
 ##########################################################################
 ### concatenate data and explore
@@ -370,9 +374,22 @@ dev.off()
 
 #### plot pi across genome
 #### plotting mean and differences
+#### highlight significant SNPs
+
+
 
 pi.s <- split(pi, pi$chrom)
 win.var <- pi.s
+
+
+bon.cutoff <- 0.05/nrow(pi)
+#pi.sig <- pi[-log10(pi$pval)>=-log10(bon.cutoff),]  #bonferroni cutoff would be 4.77 -> 16 loci
+pi.sig <- pi[-log10(pi$pval)>=4,]  #bonferroni cutoff would be 4.77
+
+pi.sig <- pi.sig[is.na(pi.sig[,1])==FALSE,]  ##189 loci
+pi.sig.s <- split(pi.sig, pi.sig$chrom)
+sig.var <- pi.sig.s
+
 
 max.pos <- lapply(win.var, function(x){max(x[,4])})
 max.pos <- unlist(max.pos)
@@ -382,6 +399,7 @@ gl <- sum(max.pos)
 c.col <- c("darkblue","dodgerblue1","darkblue", "dodgerblue1", "darkblue","dodgerblue1","darkblue", "dodgerblue1")
 cp.start <- bp.add[1:7]+(0.5*max.pos)
 up.pos <- lapply(win.var, function(x)x[,3])
+up.sig.pos <- lapply(sig.var, function(x)x[,3])
 
 pdf(file="../004.parsed.data/pi.genes.across.genome.pdf", width=8.5, height=12)
 par(mfcol=c(3,1))
@@ -393,6 +411,7 @@ for (up.sp in 16:18){
         up.dat <- lapply(up.dat, function(x){x*100})
         max.pi <- max(unlist(up.dat), na.rm=TRUE)
         min.pi <- min(unlist(up.dat), na.rm=TRUE)
+        up.sig <- lapply(sig.var, function(x){x[,colnames(x)==up.prefix]})
 
         #max.pi <- 1
         plot(0,0, xlim=c(0,gl),ylim=c(min.pi,max.pi),type="n", xaxt="n",ylab="",xlab="")
@@ -401,6 +420,10 @@ for (up.sp in 16:18){
                 c.bp.add <- bp.add[up.c]
                 c.pos <- up.pos[[up.c]] + c.bp.add
                 points(c.pos, c.dat,type="p", col=c.col[up.c])
+                
+                sig.pos <- up.sig.pos[[up.c]] + c.bp.add
+                sig.dat <- up.sig[[up.c]]
+                points(sig.pos, sig.dat*100, type="p", col="orange", pch=19)
         }
         abline(v=c(0,cs), col="grey50",lty=3)
         mtext(up.sn, side=3, line=-1.5, cex=0.8, adj=0.975, font=4)
@@ -410,27 +433,20 @@ for (up.sp in 16:18){
 }
 dev.off()
 ### crazy noisy!!!  but no obvious patterns now like seen in the windows...
-### pools 12 and 13 aren't complete - need to rerun...
+### slightly shifted towards pub having greater pi.  (all values as well as significant differences)
+
+lm1 <- lm(pi$p.mean ~ pi$f.mean)
+
+###Coefficients:
+#(Intercept)    pi$f.mean  
+#  0.0007809    0.8867368  
+# Adjusted R-squared:  0.7939
+#   p-value: < 2.2e-16
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#### save this variable (will fix when rerun...)
+ genes.pi <- pi
+ save(genes.pi, file="../004.parsed.data/genes.pi.Rdata")
 
 
 
