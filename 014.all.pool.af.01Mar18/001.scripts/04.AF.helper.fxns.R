@@ -83,3 +83,32 @@ get.af <- function(af.line){
 	return(out.dat)
 }
 
+
+###### same as get.af, but polarize SNP to Semi
+##### returns frequency and p-val of derived variants
+##### used in 25.polarization.R - see this script for input file format
+
+get.derived.af <- function(af.line){
+	#print(af.line)
+	## parse out allele frequencies
+	alleles <- unlist(af.line[5:14])
+	alleles <- strsplit(alleles, "/")
+	alleles <- do.call(rbind, alleles)
+	class(alleles) <- "numeric"
+	colnames(alleles) <- unlist(strsplit(as.character(af.line[4]),"/"))
+	
+	## decide which is derived
+	sa <- as.character(af.line[19])
+	alleles <- alleles[,colnames(alleles)!=sa]
+	## check that semi allele is one of the AQ alleles
+	## if not, return NAs
+	if(length(alleles)!=10) {out.freqs <- rep(NA,10)
+		} else {out.freqs <- alleles}
+	return(out.freqs)
+}
+
+
+
+
+
+

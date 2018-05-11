@@ -37,6 +37,15 @@ biallele.afs <- apply(biallele.freq, 1, get.af)
 save(biallele.afs, file=OutFile)
 
 
+##############################
+### write chr and pos of biallele.freq
+### to use as a filter for Semi SNPs vcf in GATK
+#########################################
+
+options(scipen = 999)
+bi.pos <- paste(biallele.freq[,1], as.numeric(biallele.freq[,2]), sep=":")
+bi.pos <- c("HEADER", bi.pos)
+write.table(bi.pos, file="pool.biallelic.SNPS.table", quote=FALSE,col.names=FALSE, row.names=FALSE)
 
 
 

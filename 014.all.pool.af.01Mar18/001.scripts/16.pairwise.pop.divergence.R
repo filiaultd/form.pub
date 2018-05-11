@@ -10,7 +10,7 @@ setwd("/lustre/scratch/projects/aquilegia/014.all.pool.af.01Mar18/002.input/")
 ### load divergence functions
 source("/lustre/scratch/projects/aquilegia/014.all.pool.af.01Mar18/001.scripts/00.divergence.functions.R")
 
-load("12.calc.divergence.RData")
+load("12.calc.divergence.RData")  ### this is from old name of script 12.
 load("biallelic.allele.freq.bi.af.Rdata" )
 pool.index <- read.table("pool.order.index.txt",stringsAsFactors=FALSE, header=TRUE)
 

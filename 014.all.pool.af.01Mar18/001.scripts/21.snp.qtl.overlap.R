@@ -95,7 +95,7 @@ bonf.num.peak <- qtl.snp.rotation(ss.pos=tp.pos, qtl.pos=qtl.peak, max.bp=len.ma
 
 ### using diverged snps according to permutations
 perm.num <- qtl.snp.rotation(ss.pos=ss.n[,2], qtl.pos=qtl.n[,2:3], max.bp=len.max, n.rotation=1000) #121
-perm.num.peak <- qtl.snp.rotation(ss.pos=ss.n[,2], qtl.pos=qtl.peak, max.bp=len.max, n.rotation=1000) #121
+perm.num.peak <- qtl.snp.rotation(ss.pos=ss.n[,2], qtl.pos=qtl.peak, max.bp=len.max, n.rotation=1000) #
 
 
 ## t-test p-value <=0.000001 (-log10 ==6)

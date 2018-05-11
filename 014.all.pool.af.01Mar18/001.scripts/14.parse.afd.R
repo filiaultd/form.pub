@@ -11,21 +11,21 @@ bi.file <- "no169.pools.poly.sync.biallelic.out"
 
 setwd(input.dir)
 
-#bi.snps <- read.table(bi.file, stringsAsFactors=FALSE)
-#chrs <- unique(bi.snps[,1])[1:7]
-#bi.snps <- bi.snps[bi.snps[,1]%in%chrs,]
+bi.snps <- read.table(bi.file, stringsAsFactors=FALSE)
+chrs <- unique(bi.snps[,1])[1:7]
+bi.snps <- bi.snps[bi.snps[,1]%in%chrs,]
 
-#pool.index <- read.table("pool.order.index.txt", header=TRUE,stringsAsFactors=FALSE) 
+pool.index <- read.table("pool.order.index.txt", header=TRUE,stringsAsFactors=FALSE) 
 
-#load(file="biallelic.allele.freq.bi.af.Rdata")  ### this is allele frequencies
+load(file="biallelic.allele.freq.bi.af.Rdata")  ### this is allele frequencies
 
 ##get sig diffs, plot across genome, permute as others
 
-#pub.mean.af <- apply(bi.af[,which(pool.index$species=="pubescens")], 1, function(x){mean(x, na.rm=TRUE)})
-#form.mean.af <- apply(bi.af[,which(pool.index$species=="formosa")], 1, function(x){mean(x, na.rm=TRUE)})
+pub.mean.af <- apply(bi.af[,which(pool.index$species=="pubescens")], 1, function(x){mean(x, na.rm=TRUE)})
+form.mean.af <- apply(bi.af[,which(pool.index$species=="formosa")], 1, function(x){mean(x, na.rm=TRUE)})
 
-#mean.fp.diff <- form.mean.af-pub.mean.af
-#both.mean.af <- cbind(bi.snps[,1:2],pub.mean.af, form.mean.af, mean.fp.diff)
+mean.fp.diff <- form.mean.af-pub.mean.af
+both.mean.af <- cbind(bi.snps[,1:2],pub.mean.af, form.mean.af, mean.fp.diff)
 
 
 
@@ -46,9 +46,9 @@ fst.kw <- function(fst.a, fst.b){
 }
 
 
-#fp.kw <- fst.kw(bi.af[,which(pool.index$species=="formosa")],bi.af[,which(pool.index$species=="pubescens")])
+fp.kw <- fst.kw(bi.af[,which(pool.index$species=="formosa")],bi.af[,which(pool.index$species=="pubescens")])
 
-#both.mean.af <- cbind(both.mean.af, fp.kw)
+both.mean.af <- cbind(both.mean.af, fp.kw)
 
 #save.image()
 load(".RData")

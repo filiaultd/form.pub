@@ -1,6 +1,9 @@
 ### parsing allele frequency differences
 ### DLF 15Mar18
 
+
+#### this seems to be obsolete??
+
 InDataDir="/lustre/scratch/projects/aquilegia/014.all.pool.af.01Mar18/003.output"
 FunFile="/lustre/scratch/projects/aquilegia/014.all.pool.af.01Mar18/001.scripts/04.AF.helper.fxns.R"
 BamDir="/lustre/scratch/projects/aquilegia/001.pool.bams"
